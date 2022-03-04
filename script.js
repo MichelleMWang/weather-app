@@ -1,9 +1,3 @@
-/*const location = document.getElementById("location"); 
-const temp = document.getElementById("temperature"); 
-const tempDesc = document.getElementById("temp-description"); 
-const high = document.getElementById("high"); 
-const low = document.getElementById("low"); 
-*/ 
 const header = document.getElementById('header'); 
 
 function getLocation(){
@@ -34,25 +28,35 @@ function locationError(){
 function headerDOM(location, temp, desc, high, low){
     const loc = document.createElement('div'); 
     loc.textContent = location;
+    loc.classList.add('location'); 
     header.appendChild(loc); 
 
     const temperature = document.createElement('div'); 
-    temperature.textContent = temp;
+    temperature.textContent = toFahrenheitFromKelvin(temp) + "°F";
+    temperature.classList.add('temp'); 
     header.appendChild(temperature); 
 
     const description = document.createElement('div'); 
     description.textContent = desc;
+    description.classList.add('desc'); 
     header.appendChild(description); 
 
     const highlow = document.createElement('div'); 
+    highlow.classList.add('high-low'); 
     const lowed = document.createElement('span'); 
-    lowed.textContent = "L: " + low + " ";
+    lowed.textContent = "L: " + toFahrenheitFromKelvin(low) + "° ";
+    lowed.classList.add('low'); 
     highlow.appendChild(lowed); 
     const highed = document.createElement('span'); 
-    highed.textContent = "H: " + high;
+    highed.textContent = "H: " + toFahrenheitFromKelvin(high) + "°" ;
+    highed.classList.add('high'); 
     highlow.appendChild(highed); 
     header.appendChild(highlow); 
 
+}
+
+function toFahrenheitFromKelvin(kelvin){
+    return Math.round((kelvin - 273.15) * (9/5) + 32); 
 }
 
 getLocation(); 
